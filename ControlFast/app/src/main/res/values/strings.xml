@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ControlFast</string>
+
+    <!-- MainActivity -->
+    <string name="main_title">Mis Gastos</string>
+    <string name="total_gastos">Gasto Total</string>
+    <string name="empty_state_title">No hay gastos registrados</string>
+    <string name="empty_state_subtitle">Toca el botón + para agregar tu primer gasto</string>
+
+    <!-- AddExpenseActivity -->
+    <string name="add_expense_title">Agregar Gasto</string>
+    <string name="edit_expense_title">Editar Gasto</string>
+    <string name="hint_monto">Monto</string>
+    <string name="hint_categoria">Categoría</string>
+    <string name="hint_descripcion">Descripción</string>
+    <string name="hint_fecha">Fecha</string>
+    <string name="btn_guardar">Guardar</string>
+    <string name="btn_actualizar">Actualizar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="btn_cambiar_fecha">Cambiar</string>
+
+    <!-- SummaryActivity -->
+    <string name="summary_title">Resumen de Gastos</string>
+    <string name="resumen_mensual">Resumen Mensual</string>
+    <string name="distribucion_categoria">Distribución por Categoría</string>
+    <string name="gastos_categoria">Gastos por Categoría</string>
+    <string name="estadisticas_generales">Estadísticas Generales</string>
+
+    <!-- Mensajes -->
+    <string name="msg_gasto_guardado">Gasto guardado exitosamente</string>
+    <string name="msg_gasto_actualizado">Gasto actualizado exitosamente</string>
+    <string name="msg_gasto_eliminado">Gasto eliminado exitosamente</string>
+    <string name="msg_error_monto">Ingrese un monto válido</string>
+    <string name="msg_error_descripcion">Ingrese una descripción</string>
+
+    <!-- Diálogos -->
+    <string name="dialog_delete_title">Eliminar Gasto</string>
+    <string name="dialog_delete_message">¿Estás seguro de eliminar este gasto?</string>
+    <string name="dialog_delete_all_title">Eliminar Todos los Gastos</string>
+    <string name="dialog_delete_all_message">¿Estás seguro? Esta acción no se puede deshacer.</string>
+    <string name="btn_eliminar">Eliminar</string>
+
+    <!-- Menú -->
+    <string name="menu_delete_all">Eliminar todos</string>
+
+    <!-- Descripciones de Contenido -->
+    <string name="cd_add_expense">Agregar gasto</string>
+    <string name="cd_view_summary">Ver resumen</string>
+</resources>

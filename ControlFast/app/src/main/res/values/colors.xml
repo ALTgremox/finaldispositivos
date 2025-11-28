@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores Principales -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores Personalizados de ControlFast -->
+    <color name="primary_color">#FF2196F3</color>
+    <color name="primary_dark">#FF1976D2</color>
+    <color name="primary_light">#FFBBDEFB</color>
+    <color name="accent_color">#FFFF9800</color>
+
+    <!-- Colores de Categorías -->
+    <color name="categoria_alimentacion">#FFFF6B6B</color>
+    <color name="categoria_transporte">#FF4ECDC4</color>
+    <color name="categoria_entretenimiento">#FFFFBE0B</color>
+    <color name="categoria_salud">#FF95E1D3</color>
+    <color name="categoria_educacion">#FF9B59B6</color>
+    <color name="categoria_servicios">#FF3498DB</color>
+    <color name="categoria_compras">#FFE74C3C</color>
+    <color name="categoria_otros">#FF95A5A6</color>
+
+    <!-- Colores de Fondo y Texto -->
+    <color name="background_light">#FFF5F5F5</color>
+    <color name="background_dark">#FF121212</color>
+    <color name="text_primary">#FF212121</color>
+    <color name="text_secondary">#FF757575</color>
+
+    <!-- Colores de Estado -->
+    <color name="success">#FF4CAF50</color>
+    <color name="error">#FFF44336</color>
+    <color name="warning">#FFFFC107</color>
+</resources>
