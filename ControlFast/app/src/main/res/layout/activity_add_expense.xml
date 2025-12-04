@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout de la pantalla para registrar o editar un gasto.
+    Incluye:
+    - AppBar con Toolbar.
+    - Contenido desplazable con campos de monto, categoría, descripción y fecha.
+    - Botones de acción para cancelar y guardar.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +14,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.AddExpenseActivity">
 
+    <!-- Barra superior con Toolbar principal -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +29,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Contenido principal desplazable -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +45,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Monto"
+                android:hint="@string/hint_monto"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@android:drawable/ic_menu_sort_by_size"
                 app:boxStrokeColor="?attr/colorPrimary"
@@ -52,11 +61,11 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Spinner de Categoría -->
+            <!-- Selector de Categoría de gasto -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Categoría"
+                android:hint="@string/hint_categoria"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@android:drawable/ic_menu_agenda"
                 app:boxStrokeColor="?attr/colorPrimary"
@@ -73,11 +82,11 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Campo de Descripción -->
+            <!-- Campo de Descripción del gasto -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Descripción"
+                android:hint="@string/hint_descripcion"
                 android:layout_marginBottom="16dp"
                 app:startIconDrawable="@android:drawable/ic_menu_edit"
                 app:boxStrokeColor="?attr/colorPrimary"
@@ -96,7 +105,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Selector de Fecha -->
+            <!-- Tarjeta para selección de fecha del gasto -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,6 +122,7 @@
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
+                    <!-- Ícono de calendario -->
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -120,6 +130,7 @@
                         android:tint="?attr/colorPrimary"
                         android:layout_marginEnd="12dp" />
 
+                    <!-- Texto de etiqueta y fecha seleccionada -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -129,7 +140,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Fecha"
+                            android:text="@string/hint_fecha"
                             android:textSize="12sp"
                             android:textColor="?attr/colorPrimary"
                             android:alpha="0.7" />
@@ -138,19 +149,20 @@
                             android:id="@+id/tv_selected_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="01/01/2024"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnBackground"
-                            android:layout_marginTop="4dp" />
+                            android:layout_marginTop="4dp"
+                            tools:text="01/01/2024" />
 
                     </LinearLayout>
 
+                    <!-- Botón para abrir el DatePicker -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_select_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Cambiar"
+                        android:text="@string/btn_cambiar_fecha"
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         app:cornerRadius="8dp" />
 
@@ -158,7 +170,7 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Botones -->
+            <!-- Sección de botones de acción (Cancelar / Guardar) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,23 +178,25 @@
                 android:gravity="center"
                 android:layout_marginTop="8dp">
 
+                <!-- Botón para cancelar el registro/edición -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_cancel"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:text="Cancelar"
+                    android:text="@string/btn_cancelar"
                     android:textSize="16sp"
                     android:layout_marginEnd="8dp"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     app:cornerRadius="12dp" />
 
+                <!-- Botón para guardar el gasto -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:text="Guardar"
+                    android:text="@string/btn_guardar"
                     android:textSize="16sp"
                     android:layout_marginStart="8dp"
                     app:cornerRadius="12dp" />
