@@ -6,48 +6,91 @@ import com.example.controlfast.data.dao.ExpenseDao
 import com.example.controlfast.data.model.Expense
 import java.util.*
 
+/**
+ * Repositorio de gastos.
+ *
+ * Encapsula el acceso al [ExpenseDao] y expone métodos de más alto nivel
+ * para ser usados desde el ViewModel. Su función principal es separar
+ * la lógica de datos de la capa de presentación.
+ */
 class ExpenseRepository(private val expenseDao: ExpenseDao) {
 
-    // Obtener todos los gastos
+    // ==========================
+    // LiveData expuestos
+    // ==========================
+
+    /** Lista reactiva con todos los gastos almacenados. */
     val allExpenses: LiveData<List<Expense>> = expenseDao.getAllExpenses()
 
-    // Obtener total de gastos
+    /** Total reactivo de todos los gastos registrados. */
     val totalExpenses: LiveData<Double?> = expenseDao.getTotalExpenses()
 
-    // Obtener gastos por categoría para gráficas
+    /**
+     * Totales de gastos agrupados por categoría.
+     * Útil para gráficas y resúmenes.
+     */
     val expensesByCategory: LiveData<List<CategoryTotal>> = expenseDao.getExpensesByCategory()
 
-    // Insertar gasto
+    // ==========================
+    // Operaciones CRUD básicas
+    // ==========================
+
+    /**
+     * Inserta un nuevo gasto en la base de datos.
+     *
+     * @return ID generado para el nuevo registro.
+     */
     suspend fun insert(expense: Expense): Long {
         return expenseDao.insertExpense(expense)
     }
 
-    // Actualizar gasto
+    /**
+     * Actualiza un gasto existente.
+     */
     suspend fun update(expense: Expense) {
         expenseDao.updateExpense(expense)
     }
 
-    // Eliminar gasto
+    /**
+     * Elimina un gasto específico.
+     */
     suspend fun delete(expense: Expense) {
         expenseDao.deleteExpense(expense)
     }
 
-    // Obtener gasto por ID
+    /**
+     * Obtiene un gasto puntual por su ID.
+     *
+     * @return El gasto si existe, o null en caso contrario.
+     */
     suspend fun getExpenseById(id: Int): Expense? {
         return expenseDao.getExpenseById(id)
     }
 
-    // Obtener gastos por categoría
+    // ==========================
+    // Consultas específicas
+    // ==========================
+
+    /**
+     * Obtiene los gastos filtrados por una categoría.
+     */
     fun getExpensesByCategory(categoria: String): LiveData<List<Expense>> {
         return expenseDao.getExpensesByCategory(categoria)
     }
 
-    // Obtener total por categoría
+    /**
+     * Obtiene el total gastado en una categoría específica.
+     */
     fun getTotalByCategory(categoria: String): LiveData<Double?> {
         return expenseDao.getTotalByCategory(categoria)
     }
 
-    // Obtener gastos del mes actual
+    /**
+     * Obtiene los gastos correspondientes al mes actual.
+     *
+     * Calcula el primer día del mes a las 00:00:00.000 y
+     * usa ese timestamp como inicio del rango.
+     */
     fun getExpensesThisMonth(): LiveData<List<Expense>> {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_MONTH, 1)
@@ -60,17 +103,34 @@ class ExpenseRepository(private val expenseDao: ExpenseDao) {
         return expenseDao.getExpensesThisMonth(startOfMonth)
     }
 
-    // Obtener gastos por rango de fechas
+    /**
+     * Obtiene los gastos dentro de un rango de fechas [startDate, endDate].
+     *
+     * @param startDate Timestamp inicial en milisegundos.
+     * @param endDate Timestamp final en milisegundos.
+     */
     fun getExpensesByDateRange(startDate: Long, endDate: Long): LiveData<List<Expense>> {
         return expenseDao.getExpensesByDateRange(startDate, endDate)
     }
 
-    // Eliminar todos los gastos
+    /**
+     * Elimina todos los registros de gastos de la base de datos.
+     */
     suspend fun deleteAllExpenses() {
         expenseDao.deleteAllExpenses()
     }
 
-    // Obtener estadísticas generales
+    // ==========================
+    // Estadísticas generales
+    // ==========================
+
+    /**
+     * Calcula estadísticas generales a partir de la lista actual de gastos.
+     *
+     * Nota importante:
+     * - Usa el valor actual de [allExpenses.value], por lo que depende de que
+     *   el LiveData haya sido observado y cargado previamente.
+     */
     suspend fun getStatistics(): ExpenseStatistics {
         val allExpenses = allExpenses.value ?: emptyList()
 
@@ -78,7 +138,7 @@ class ExpenseRepository(private val expenseDao: ExpenseDao) {
         val promedio = if (allExpenses.isNotEmpty()) total / allExpenses.size else 0.0
         val categoriaConMasGastos = allExpenses
             .groupBy { it.categoria }
-            .maxByOrNull { it.value.sumOf { expense -> expense.monto } }
+            .maxByOrNull { entry -> entry.value.sumOf { expense -> expense.monto } }
             ?.key ?: "N/A"
 
         return ExpenseStatistics(
@@ -90,7 +150,14 @@ class ExpenseRepository(private val expenseDao: ExpenseDao) {
     }
 }
 
-// Data class para estadísticas
+/**
+ * Data class que agrupa las estadísticas generales de los gastos.
+ *
+ * @param totalGastado Suma total de todos los gastos.
+ * @param promedioGasto Promedio por gasto registrado.
+ * @param cantidadGastos Número total de registros.
+ * @param categoriaConMasGastos Nombre de la categoría con mayor monto acumulado.
+ */
 data class ExpenseStatistics(
     val totalGastado: Double,
     val promedioGasto: Double,
