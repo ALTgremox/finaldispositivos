@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout de la pantalla principal de la aplicación.
+    Muestra:
+    - Toolbar superior.
+    - Tarjeta con el total de gastos.
+    - Lista de gastos registrados.
+    - Estado vacío cuando no hay datos.
+    - FABs para agregar gastos y ver el resumen.
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,6 +16,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <!-- Contenedor de barra de aplicación (AppBar + Toolbar) -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +31,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- Contenido principal desplazable de la pantalla -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +43,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Tarjeta de Total -->
+            <!-- Tarjeta que muestra el total de gastos -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,41 +58,41 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
+                    <!-- Etiqueta del total -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gasto Total"
+                        android:text="@string/total_gastos"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:alpha="0.9" />
 
+                    <!-- Monto total de gastos (actualizado desde código) -->
                     <TextView
                         android:id="@+id/tv_total_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="S/ 0.00"
                         android:textColor="@android:color/white"
                         android:textSize="32sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        tools:text="S/ 0.00" />
 
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Título de la lista -->
+            <!-- Título de la sección de lista de gastos -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mis Gastos"
+                android:text="@string/main_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"
                 android:textColor="?attr/colorOnBackground" />
 
-            <!-- RecyclerView de gastos -->
-
-            <!-- Estado vacío -->
+            <!-- Lista de gastos (RecyclerView) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_expenses"
                 android:layout_width="match_parent"
@@ -90,6 +101,7 @@
                 android:paddingBottom="80dp"
                 tools:listitem="@layout/item_expense" />
 
+            <!-- Vista de estado vacío cuando no hay gastos -->
             <LinearLayout
                 android:id="@+id/tv_empty_state"
                 android:layout_width="match_parent"
@@ -100,6 +112,7 @@
                 android:visibility="gone"
                 tools:visibility="visible">
 
+                <!-- Ícono ilustrativo para estado vacío -->
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="120dp"
@@ -107,19 +120,21 @@
                     android:alpha="0.3"
                     android:tint="?attr/colorPrimary" />
 
+                <!-- Mensaje principal de estado vacío -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No hay gastos registrados"
+                    android:text="@string/empty_state_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginTop="16dp"
                     android:textColor="?attr/colorOnBackground" />
 
+                <!-- Mensaje de ayuda para el usuario -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Toca el botón + para agregar tu primer gasto"
+                    android:text="@string/empty_state_subtitle"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     android:textAlignment="center"
@@ -131,18 +146,18 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB para agregar gasto -->
+    <!-- Botón flotante para agregar un nuevo gasto -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_expense"
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="Agregar gasto"
+        android:contentDescription="@string/cd_add_expense"
         app:srcCompat="@android:drawable/ic_input_add"
         app:tint="@android:color/white" />
 
-    <!-- FAB para ver resumen -->
+    <!-- Botón flotante secundario para abrir el resumen de gastos -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_summary"
         android:layout_width="wrap_content"
@@ -150,7 +165,7 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="16dp"
         android:layout_marginBottom="88dp"
-        android:contentDescription="Ver resumen"
+        android:contentDescription="@string/cd_view_summary"
         app:srcCompat="@android:drawable/ic_menu_view"
         app:tint="@android:color/white"
         app:backgroundTint="?attr/colorSecondary"
